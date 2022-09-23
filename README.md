@@ -1,2 +1,2 @@
 # microscopy-bubbles-recognition
-Microscopy bubbles segmentation and size measuring system
+Microscopy bubbles segmentation and size measuring system for scientific purposes

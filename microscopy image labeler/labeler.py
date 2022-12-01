@@ -1,4 +1,4 @@
-imena=(['Chang2002.png'])
+imena=(['Image_087.tif'])
 
 
 import numpy as np
@@ -28,7 +28,7 @@ session = InteractiveSession(config=config)
 for imagenamme in imena:
     print(imagenamme)
     image=cv2.imread(imagenamme)
-    modelk=models.load_model('model3ll16')
+    modelk=models.load_model('model3ll16.h5')
     modelk.summary()
 
 
@@ -132,7 +132,7 @@ for imagenamme in imena:
     img=np.zeros((5000,1024),dtype='float16')
     kooor=np.zeros((5000,3),dtype='float16')
 
-    modelk=models.load_model('model14ll16')
+    modelk=models.load_model('model14ll16.h5')
 
     ver=0.9997
 

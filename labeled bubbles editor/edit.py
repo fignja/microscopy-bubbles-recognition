@@ -5,11 +5,11 @@ import pickle
 import time
 from matplotlib import pyplot as plt
 masht=1.7
+import sys
 
-
-imagenamme='Image_087.png'    
-filename=imagenamme[:-3]+'pigy'
-
+ 
+filename=str(sys.argv[1])
+imagenamme=filename[:-5]+'.tif'
 
 ishod,kooor= pickle.load(open(filename, 'rb'))
 

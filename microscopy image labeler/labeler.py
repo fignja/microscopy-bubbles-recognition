@@ -1,5 +1,5 @@
-imena=(['Image_087.tif'])
-
+from imutils import paths
+imena=list(paths.list_images('imgs'))
 
 import numpy as np
 import cv2
@@ -21,33 +21,33 @@ from tensorflow.compat.v1 import InteractiveSession
 config = ConfigProto()
 config.gpu_options.allow_growth = True
 session = InteractiveSession(config=config)
-
-
+bs=1000
+ms=10000
 
     
 for imagenamme in imena:
     print(imagenamme)
     image=cv2.imread(imagenamme)
-    modelk=models.load_model('model3ll16.h5')
+    modelk=models.load_model('model30x16n.h5')
     modelk.summary()
 
 
 
     kk=0
-    img=np.zeros((5000,1024),dtype='float16')
+    img=np.zeros((ms,1024),dtype='float16')
     img2=np.empty((0,1024),dtype='float16')
     trr2=np.empty((0),dtype='float')
     kooor2=np.empty((0,3),dtype='float16')
-    kooor=np.zeros((5000,3),dtype='float16')
+    kooor=np.zeros((ms,3),dtype='float16')
     nnj=0
-    iil=15
-    ver=0.975
+    iil=14.6
+    ver=0.99925
     while iil<33:
-        iil=int(iil*1.07)
+        iil=int(iil*1.1)
         Ni,Nj=(iil,iil)
         print(iil/3)
-        istep=max(2,int(iil/30))
-        jstep=max(2,int(iil/30))
+        istep=max(2,int(iil/20))
+        jstep=max(2,int(iil/20))
     
 
 
@@ -58,9 +58,9 @@ for imagenamme in imena:
         #gray = cv2.GaussianBlur(gray,(moda,moda),cv2.BORDER_DEFAULT)
         #if iil>32:
         #gray = cv2.GaussianBlur(gray,(3,3),cv2.BORDER_DEFAULT)	
-        mean=gray.mean()+00
+        mean=125
         
-        bordersize=0 # int(iil/3)
+        bordersize=int(0.5*iil)
         gray=cv2.copyMakeBorder(gray, top=bordersize, bottom=bordersize, left=bordersize, right=bordersize, borderType= cv2.BORDER_CONSTANT, value=[mean] )
         gray=gray/255.0
         #print(imgb.shape[1])
@@ -86,9 +86,9 @@ for imagenamme in imena:
                    # print(kooor[kk,:])
                 kk=kk+1
                 
-                if kk>4999:
+                if kk>ms-1:
                     kk=0
-                    trr=modelk.predict(img.reshape(img.shape[0],32,32,1),verbose=1,batch_size=500)
+                    trr=modelk.predict(img.reshape(img.shape[0],32,32,1),verbose=1,batch_size=bs)
                     
                     trr=trr.reshape((trr.shape[0]))
                     img=img[trr>ver]
@@ -96,9 +96,9 @@ for imagenamme in imena:
                     img2=np.append(img2,img,axis=0)
                     kooor2=np.append(kooor2,kooor,axis=0)
                     trr2=np.append(trr2,trr[trr>ver],axis=0)
-                    img=np.zeros((5000,1024),dtype='float16')
+                    img=np.zeros((ms,1024),dtype='float16')
 
-                    kooor=np.zeros((5000,3),dtype='float16')
+                    kooor=np.zeros((ms,3),dtype='float16')
                 
                   #  if kk>6000:
                       #  break
@@ -114,7 +114,7 @@ for imagenamme in imena:
     kooor=kooor[:kk]
     img=img[:kk]
 
-    trr=modelk.predict(img.reshape(img.shape[0],32,32,1),verbose=1,batch_size=500)
+    trr=modelk.predict(img.reshape(img.shape[0],32,32,1),verbose=1,batch_size=bs)
     trr=trr.reshape((trr.shape[0]))
     img=img[trr>ver]
     kooor=kooor[trr>ver]
@@ -129,31 +129,31 @@ for imagenamme in imena:
 
     print(imagenamme)
 
-    img=np.zeros((5000,1024),dtype='float16')
-    kooor=np.zeros((5000,3),dtype='float16')
+    img=np.zeros((ms,1024),dtype='float16')
+    kooor=np.zeros((ms,3),dtype='float16')
 
-    modelk=models.load_model('model14ll16.h5')
+    modelk=models.load_model('model14x16n.h5')
 
-    ver=0.9997
+    ver=0.99925
 
     kk=0
     nnj=0
     iil=15
-    while iil<250:
-        iil=int(iil*1.07)
+    while iil<300:
+        iil=int(iil*1.1)
         Ni,Nj=(iil,iil)
         print(iil/1.4)
-        istep=max(2,int(iil/30))
-        jstep=max(2,int(iil/30))
+        istep=max(2,int(iil/20))
+        jstep=max(2,int(iil/20))
     
 
 
         gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-        gray = cv2.equalizeHist(gray)
-        moda=max(3,2*int(iil/10//2)+1)
-        print(moda)
+        #gray = cv2.equalizeHist(gray)
+        #moda=max(3,2*int(iil/10//2)+1)
+        #print(moda)
         #gray = cv2.GaussianBlur(gray,(moda,moda),cv2.BORDER_DEFAULT)
-        #bordersize=int(0.7*iil)
+        bordersize=int(0.5*iil)
         gray=cv2.copyMakeBorder(gray, top=bordersize, bottom=bordersize, left=bordersize, right=bordersize, borderType= cv2.BORDER_CONSTANT, value=[mean] )
         gray=gray/255.0
         if Ni<32 :
@@ -173,9 +173,9 @@ for imagenamme in imena:
                    # print(kooor[kk,:])
                 kk=kk+1
                 
-                if kk>4999:
+                if kk>ms-1:
                     kk=0
-                    trr=modelk.predict(img.reshape(img.shape[0],32,32,1),verbose=1,batch_size=500)
+                    trr=modelk.predict(img.reshape(img.shape[0],32,32,1),verbose=1,batch_size=bs)
                     
                     trr=trr.reshape((trr.shape[0]))
                     img=img[trr>ver]
@@ -183,9 +183,9 @@ for imagenamme in imena:
                     img2=np.append(img2,img,axis=0)
                     kooor2=np.append(kooor2,kooor,axis=0)
                     trr2=np.append(trr2,trr[trr>ver],axis=0)
-                    img=np.zeros((5000,1024),dtype='float16')
+                    img=np.zeros((ms,1024),dtype='float16')
 
-                    kooor=np.zeros((5000,3),dtype='float16')
+                    kooor=np.zeros((ms,3),dtype='float16')
                 
                   #  if kk>6000:
                       #  break
@@ -201,7 +201,7 @@ for imagenamme in imena:
     kooor=kooor[:kk]
     img=img[:kk]
 
-    trr=modelk.predict(img.reshape(img.shape[0],32,32,1),verbose=1,batch_size=500)
+    trr=modelk.predict(img.reshape(img.shape[0],32,32,1),verbose=1,batch_size=bs)
     trr=trr.reshape((trr.shape[0]))
     img=img[trr>ver]
     kooor=kooor[trr>ver]

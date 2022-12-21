@@ -22,14 +22,14 @@ config = ConfigProto()
 config.gpu_options.allow_growth = True
 session = InteractiveSession(config=config)
 
-bs=5000
+bs=1000
 ms=50000
 
     
 for imagenamme in imena:
     print(imagenamme)
     image=cv2.imread(imagenamme)
-    modelk=models.load_model('model40l')
+    modelk=models.load_model('model40l.h5')
     modelk.summary()
 
 
@@ -152,7 +152,7 @@ for imagenamme in imena:
 
     print('vasno')
     print(len(img2))
-    modelk=models.load_model('model18l')
+    modelk=models.load_model('model18l.h5')
 
     
 

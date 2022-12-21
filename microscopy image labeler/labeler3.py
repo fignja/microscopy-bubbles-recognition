@@ -29,7 +29,7 @@ ms=10000
 for imagenamme in imena:
     print(imagenamme)
     image=cv2.imread(imagenamme)
-    modelk=models.load_model('model20l16')
+    modelk=models.load_model('model20l16.h5')
     modelk.summary()
 
 

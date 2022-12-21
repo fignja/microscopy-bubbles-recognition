@@ -26,7 +26,7 @@ session = InteractiveSession(config=config)
 ms=10000
 bs=500
 
-modelk=models.load_model('kerad20')
+modelk=models.load_model('kerad20.h5')
 modelk.summary()
     
 for imagenamme in imena:

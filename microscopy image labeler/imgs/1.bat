@@ -1,0 +1,1 @@
+python edit.py %~nx1

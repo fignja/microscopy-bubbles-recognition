@@ -7,3 +7,7 @@ Any cuda videocard is required. Minimal requerement is GTX650 for segmentation, 
 Just put imgs in segmentator and run <pre>pig.py</pre> to process the image.
 Then run the editor <pre>edit.py</pre> to get the result and fix some segmentation issues if required.
 ![Autosegmentation](./process.png)
+
+The suuplementary material can be found here:
+
+https://fptt.ru/en/issues/22025/21971/
